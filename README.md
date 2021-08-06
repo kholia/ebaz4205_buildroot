@@ -14,12 +14,23 @@ a linux system with basic BSP (Board Support Package).
 This layer depends on:
 
 	URI: git://git.busybox.net/buildroot
-	branch: 2020.11.x
+	branch: master (commit a9d585a41701d5ef1df7955faf0ee057132769e6 - 6th-August-2021)
 
 ## Build
 
 	make BR2_EXTERNAL=/path/to/ebaz4205_buildroot zynq_ebaz4205_defconfig
 	make 2>&1 | tee build.log
+
+
+## Build Hacks
+
+On systems that use modern GCC versions (e.g. Ubuntu 21.04), the build may fail
+with `multiple definition of yylloc` error message(s) from the linker.
+
+- Change `YYLTYPE yylloc` to `extern YYLTYPE yylloc` in the failing code.
+
+- Remove the offending `YYLTYPE yylloc` line from the failing code, if required.
+
 
 ## Installation
 
